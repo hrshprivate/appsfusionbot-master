@@ -1,0 +1,76 @@
+welcome_first: |
+  Hi, I can send you review updates from App Store and Google Play. You can add me to telegram group to notify your team about reviews!
+welcome_second: |
+  Press Search to start subscribing to reviews
+welcome_third: |
+  To see already subscribed apps press my apps'
+welcome_fourth: |
+  To leave feedback press Leave feedback
+searchFirstPart: |
+  Type app name and I'll find it or just paste the link to App Store app or Google Play app
+  Now, searching country is _${country}_, you can change it. Press /setcountry
+
+searchSecondPart: |
+  I'm searching in _${store}_. To change it press /setstore
+
+
+review: |
+  *${app?.title || title}*
+  ${rating}
+  ${app.text}\n
+  _${app?.version || ""}_ ${app?.date?.toISOString().split("T")[0] || ""}
+  _${app.userName}_
+
+reviewLast: |
+  *${app?.title || title}*
+  ${rating}
+  ${app.text}\n
+  _${app?.version || ""}_ ${app?.date?.split("T")[0] || ""}
+  _${app.userName}_
+
+addApp: |
+  I will send you review updates from ${store}
+
+trialPeriod: |
+  Your trial period will end in ${days} days
+
+subPeriod: |
+  Your subscription will end in ${days} days
+
+endPeriod: |
+  Your subscription has ended
+
+selectSub: |
+  To continue using bot after, please, select subscription plan:
+
+
+crew: |
+  Name: Crew
+
+  Price: 9$
+
+  Description: Stores: AppStore & Google Play  Apps count: unlimited
+
+mini: |
+  Name: Mini-Studio
+
+  Price: 7$
+
+  Description: Stores: AppStore & Google Play  Apps count: 6
+
+basic: |
+  Name: Basic
+
+  Price: 4$
+
+  Description: Stores: AppStore & Google Play  Apps count: 2
+
+
+withoutSub: |
+    Your currently have no subscriptions yet.
+    To start using bot, search and subscribe to any app.
+
+    Trial period (14 days) will start after subscribing to any app. Then, to continue using bot you have to select any plan: 
+      
+checkPlan: |
+    This subscription plan requires ${requiredNum} subscribed apps or less. In order to select this plan, your have to unsubscribe (Remove button) from ${extraNum} apps.
