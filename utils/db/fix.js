@@ -74,23 +74,16 @@ async function run() {
     return user.chatId
   })
   for (let chatId of chatIds2Step) {
-    const jons = await AgendaJobs.find({
-      name: 'bot-subscription',
-      'data.id': chatId,
+    const subscriptions = await Subscription.SubscriptionSchema.findAll({
+      where: { chatId: chatId },
     })
-    if (jons?.length > 1) {
-      console.log(jons?.length)
-      for (let start = 1; start < jons?.length; start++) {
-        console.log(jons[start])
-        await AgendaJobs.findOneAndDelete({ _id: jons[start]._id })
-      }
-    }
-    const subscriptions = await Subscription.find({ chatId })
-    const userFind = await UserBot.findOne({ chatId: chatId })
+    const userFind = await UserBot.UserBotSchema.findOne({
+      where: { chatId: chatId },
+    })
     console.log(
       chatId,
-      userFind.subscription.isTrial,
-      userFind.subscription.isSubscribe,
+      userFind.subscriptions[0].isTrial,
+      userFind.subscriptions[0].isSubscribe,
       subscriptions?.length
     )
     if (
