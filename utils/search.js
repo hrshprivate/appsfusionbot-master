@@ -317,7 +317,7 @@ async function nextListOfGoogleApps(ctx, data, user, key) {
     const response = await gplay.search({
       term: data.term,
       num: 250,
-      country: COUNTRIES[user.settings.country][1],
+      country: COUNTRIES[user.settings[0].country][1],
     })
     //  console.log("All apps google ", response.length)
     const apps = sendGooglePlayApps(response)

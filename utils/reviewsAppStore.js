@@ -83,7 +83,9 @@ async function reviewsByCountryAS(
 }
 
 async function lastReviewsAS(ctx, page, appId) {
-  const app = await AppReviews.AppReviewsSchema.findOne({ appId, store: 'AS' })
+  const app = await AppReviews.AppReviewsSchema.findOne({
+    where: { appId: appId, store: 'AS' },
+  })
   const reviews = app.reviews
   // console.log("All reviews as - ",reviews.length,"Reviews by rating - ", sampleByRating.length)
   const start = page * 3 - 3
@@ -126,7 +128,9 @@ async function lastReviewsAS(ctx, page, appId) {
 }
 
 async function reviewsByRatingAS(ctx, page, appId, score) {
-  const app = await AppReviews.AppReviewsSchema.findOne({ appId, store: 'AS' })
+  const app = await AppReviews.AppReviewsSchema.findOne({
+    where: { appId: appId, store: 'AS' },
+  })
   const sampleByRating = app.reviews.reduce((acc, curr) => {
     return curr.score == score ? [...acc, curr] : acc
   }, [])

@@ -179,6 +179,7 @@ async function reviewsTimeTable(chatId, appId, storeName, user) {
       )
       const userok = await UserBot.UserBotSchema.findOne({
         where: { chatId: chatId },
+        include: [UserBot.Settings, UserBot.Subscription, UserBot.CurrentApp],
       })
       await UserBot.Settings.update(
         { command: 'subscription' },
@@ -254,6 +255,7 @@ async function reviewsTimeTable(chatId, appId, storeName, user) {
       )
       const userok = await UserBot.UserBotSchema.findOne({
         where: { chatId: chatId },
+        include: [UserBot.Settings, UserBot.Subscription, UserBot.CurrentApp],
       })
       await UserBot.Settings.update(
         { command: 'subscription' },

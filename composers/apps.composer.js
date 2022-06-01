@@ -37,8 +37,6 @@ composer.command('myapps', async (ctx) => {
         counterStart,
         counterEnd
       )
-      console.log(`${appObj} - test`)
-      console.log(`${apps.applications.length} - test`)
       for (let app of appObj) {
         await ctx.bot.telegram.sendPhoto(ctx.chat.id, app.icon, app.opts)
       }

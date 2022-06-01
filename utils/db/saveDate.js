@@ -16,21 +16,21 @@ const sequelize = require('../../config/db')
 const start = async () => {
   try {
     await sequelize.authenticate()
-    await sequelize.sync()
+    await sequelize.sync({ force: true })
   } catch (e) {
     console.log(e)
   }
 }
 
 async function run() {
-  const users = await UserBot.find()
-  const applications = await Application.find()
-  const jobs = await AgendaJobs.find()
-  const subscriptions = await Subscription.find()
+  const users = await UserBot.UserBotSchema.findAll()
+  const applications = await Application.ApplicationSchema.findAll()
+  // const jobs = await AgendaJobs.find()
+  const subscriptions = await Subscription.SubscriptionSchema.findAll()
 
   fs.writeFileSync('dataDB/user.json', JSON.stringify(users))
   fs.writeFileSync('dataDB/applications.json', JSON.stringify(applications))
-  fs.writeFileSync('dataDB/jobs.json', JSON.stringify(jobs))
+  // fs.writeFileSync('dataDB/jobs.json', JSON.stringify(jobs))
   fs.writeFileSync('dataDB/subscriptions.json', JSON.stringify(subscriptions))
   console.log('FINISHED')
   sequelize.close()

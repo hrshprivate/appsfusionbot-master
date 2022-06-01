@@ -19,6 +19,7 @@ async function reviewsByCountryGS(ctx, appId, nextPaginationToken, country) {
     const newPaginationToken = apps.nextPaginationToken
     const user2 = await UserBot.UserBotSchema.findOne({
       where: { chatId: ctx.chat.id },
+      include: [UserBot.CurrentApp, UserBot.Settings, UserBot.Subscription],
     })
     await UserBot.CurrentApp.update(
       { country: country, nextPaginationToken: newPaginationToken },
@@ -60,7 +61,9 @@ async function reviewsByCountryGS(ctx, appId, nextPaginationToken, country) {
 }
 
 async function lastReviewsGS(ctx, page, appId) {
-  const app = await AppReviews.findOne({ where: { appId, store: 'GS' } })
+  const app = await AppReviews.AppReviewsSchema.findOne({
+    where: { appId: appId, store: 'GS' },
+  })
   // console.log("All reviews gs - ",reviews.length,"Reviews by rating - ", sampleByRating.length)
   const reviews = app.reviews.map((elem) => {
     elem.date = new Date(elem.date)
@@ -101,7 +104,9 @@ async function lastReviewsGS(ctx, page, appId) {
 }
 
 async function reviewsByRatingGS(ctx, page, appId, score) {
-  const app = await AppReviews.findOne({ where: { appId, store: 'GS' } })
+  const app = await AppReviews.AppReviewsSchema.findOne({
+    where: { appId: appId, store: 'GS' },
+  })
   const sampleByRating = app.reviews.reduce((acc, curr) => {
     return curr.score == score ? [...acc, curr] : acc
   }, [])

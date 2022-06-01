@@ -331,7 +331,9 @@ async function removeApp(ctx, { id, store }) {
 
 async function nextListOfMyApps(ctx, data, id) {
   //  console.log("MY APP NEXT")
-  const apps = await Application.findOne({ where: { chatId: id } })
+  const apps = await Application.ApplicationSchema.findOne({
+    where: { chatId: id },
+  })
   const counterStart = data.page * 3 - 3
   const counterEnd =
     data.page * 3 > apps.applications.length

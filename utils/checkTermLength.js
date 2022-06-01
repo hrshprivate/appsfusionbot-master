@@ -27,7 +27,7 @@ async function checkAppIdLength(appId) {
       where: { appId: appId },
     })
     if (!oldAppId) {
-      const newAppId = await AppId.AppIdSchema.create({ appId })
+      const newAppId = await AppId.AppIdSchema.create({ appId: appId })
       appIdKey = newAppId.id
     } else appIdKey = oldAppId.id
   }
