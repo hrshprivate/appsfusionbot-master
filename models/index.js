@@ -6,10 +6,10 @@ const AgendaJobs = require('./AgendaJobs')
 const AppReviews = require('./AppReviews')
 
 module.exports = {
-    Application,
-    Feedback, 
-    UserBot,
-    Subscription,
-    AgendaJobs,
-    AppReviews
+  Application,
+  Feedback,
+  UserBot,
+  Subscription,
+  AgendaJobs,
+  AppReviews,
 }
