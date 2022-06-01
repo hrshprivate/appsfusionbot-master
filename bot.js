@@ -242,7 +242,7 @@ const start = async function (err) {
         const keyboard = keyboardAfterSelect(data.plan)
         switch (data.plan) {
           case 'BASIC':
-            if (user.subscription[0].apps > 2)
+            if (user.subscriptions[0].apps > 2)
               return ctx.reply(
                 ctx.i18n.t('checkPlan', {
                   requiredNum: 2,

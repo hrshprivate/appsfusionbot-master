@@ -18,27 +18,27 @@ composer.hears('Subscription', async (ctx) => {
     })
     if (user.settings[0].command !== 'search') {
       if (subscriptions.length) {
-        if (user.subscription.days == 0) {
+        if (user.subscriptions[0].days == 0) {
           await ctx.bot.telegram.sendMessage(
             ctx.chat.id,
             ctx.i18n.t('endPeriod')
           )
         } else {
-          if (user.subscription[0].isTrial === true)
+          if (user.subscriptions[0].isTrial === true)
             await ctx.bot.telegram.sendMessage(
               ctx.chat.id,
-              ctx.i18n.t('trialPeriod', { days: user.subscription.days })
+              ctx.i18n.t('trialPeriod', { days: user.subscriptions[0].days })
             )
           else
             await ctx.bot.telegram.sendMessage(
               ctx.chat.id,
-              ctx.i18n.t('subPeriod', { days: user.subscription.days })
+              ctx.i18n.t('subPeriod', { days: user.subscriptions[0].days })
             )
         }
         await ctx.bot.telegram.sendMessage(ctx.chat.id, ctx.i18n.t('selectSub'))
       } else if (
         !subscriptions.length &&
-        user.subscription[0].isTrial === true
+        user.subscriptions[0].isTrial === true
       ) {
         await ctx.bot.telegram.sendMessage(
           ctx.chat.id,

@@ -304,16 +304,10 @@ async function addApp(ctx, { id, store }, user) {
 
 async function removeApp(ctx, { id, store }) {
   //  console.log("MY APP REMOVE - ", id, store)
-  await Application.ApplicationSchema.findOne(
-    { chatId: ctx.from.id },
-    {
-      $pull: {
-        applications: { appId: id },
-        store: { store },
-      },
-    },
-    { safe: true, multi: false, new: true }
-  )
+  let tasks = await Application.ApplicationSchema.findOne({
+    where: { chatId: ctx.from.id },
+  })
+  tasks.applications.pop({ appId: id, store: store })
   const ff = await UserBot.UserBotSchema.findOne({
     where: { chatId: ctx.chat.id },
     include: [UserBot.CurrentApp, UserBot.Settings, UserBot.Subscription],
